@@ -1,14 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState("");
 
-  //"https://api.openweathermap.org/data/2.5/weather?lat=6.457171&lon=3.327709&appid=b24f995e00a89844bd0348a04858069e";
-  //https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=b24f995e00a89844bd0348a04858069e
-  // const url =
-  //   "https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=b24f995e00a89844bd0348a04858069e";
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&APPID=b24f995e00a89844bd0348a04858069e`;
   const searchLocation = (event) => {
     if (event.key === "Enter") {
@@ -46,15 +42,21 @@ function App() {
         {data.name !== undefined && (
           <div className="bottom">
             <div className="feels">
-              {data.main ? <p>{data.main.feels_like}°F</p> : null}
+              {data.main ? (
+                <p className="bold">{data.main.feels_like.toFixed()}°F</p>
+              ) : null}
               <p>Feels like</p>
             </div>
             <div className="humidity">
-              {data.main ? <p className="bold">{data.main.humidity}%</p> : null}
+              {data.main ? (
+                <p className="bold">{data.main.humidity.toFixed()}%</p>
+              ) : null}
               <p>Humidity</p>
             </div>
             <div className="wind">
-              {data.wind ? <p className="bold">{data.wind.speed}</p> : null}
+              {data.wind ? (
+                <p className="bold">{data.wind.speed.toFixed()}MPH</p>
+              ) : null}
               <p>Wind Speed</p>
             </div>
           </div>
